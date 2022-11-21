@@ -2,16 +2,18 @@ import os
 import requests
 import json
 from cryptography.fernet import Fernet
-API_ENDPOINT = 'http://127.0.0.1:5000/addPc'
+from dotenv import load_dotenv
+from unidecode import unidecode
+load_dotenv()
+TARGET_URL = 'http://127.0.0.1:5000/f92095e6-5d49-44ae-b6aa-a3941414e97d' #gitignore
 
-KEY = 'WQP6UqEHK5EvsKeCI2EsKe4oEWL9rbMKVPbcYk2MdF8='
+KEY = os.getenv('KEY')
 fernet = Fernet(KEY)
 data = os.getlogin() + '?default notes?1'
-encMsg = fernet.encrypt(data.encode())
-#print(encMsg)
-print(json.dumps(data))
+btrData = unidecode(data)
+encMsg = fernet.encrypt(btrData.encode('utf-8'))
 S = requests.session()
-R = S.post(API_ENDPOINT, data=data)
+R = S.post(TARGET_URL, data=encMsg)
 
 if R.ok:
     print("Text: ", str(R.text))
