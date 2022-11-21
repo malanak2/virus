@@ -5,7 +5,7 @@ from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 from unidecode import unidecode
 load_dotenv()
-TARGET_URL = 'http://127.0.0.1:5000/f92095e6-5d49-44ae-b6aa-a3941414e97d' #gitignore
+## On this line replace this with "@app.route('/your_url', methods=['GET', 'POST'])" or the function wont work
 
 KEY = os.getenv('KEY')
 fernet = Fernet(KEY)
