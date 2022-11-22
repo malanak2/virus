@@ -5,7 +5,7 @@ from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 from unidecode import unidecode
 load_dotenv() # Loads dotenv
-## On this line replace this with "TARGET_URL = 'your_server:your_port/your_after_slash_in_the_other_file_same'" or the function wont work
+TARGET_URL = os.getenv('ROUTE') # Gets url from env file
 
 KEY = os.getenv('KEY') # Gets key from .env
 fernet = Fernet(KEY) # Inits fenet
