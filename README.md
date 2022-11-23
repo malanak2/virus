@@ -3,3 +3,5 @@ A part of the Virus Project! This currently connects to the server and adds pc t
 ## Required packages
 1. [Cryptography](https://pypi.org/project/cryptography/) -- Used for encrypting string to send
 2. [Requests](https://pypi.org/project/requests/) -- Used for sending data to mother
+3. [python-dotenv](https://pypi.org/project/python-dotenv/)
+4. [unidecode](https://pypi.org/project/Unidecode/)
