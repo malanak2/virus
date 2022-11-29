@@ -2,3 +2,4 @@ venv/
 .env
 test.bat
 test.py
+data.json
