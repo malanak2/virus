@@ -9,27 +9,37 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 s.connect((TCP_IP, TCP_PORT))
+def run():
+    if False: # os.path.exists(basedir + 'data.json'):
+        f = open('data.json')
+        data = json.loads(f)
+        s.send(data['id'].encode('utf-32'))
+        f.close()
+        while False:
+            print("...ok")
+        s.send(b'closeConn')
+        s.close()
+    else:
+        s.send('newU'.encode('utf-32'))
+        recData = s.recv(BUFFER_SIZE)
+        if recData.decode('utf-32') == 'sendData':
+            data = os.getlogin()
+            s.send(data.encode('utf-32'))
+        recId = s.recv(BUFFER_SIZE).decode('utf-32')
+        list = {'id': recId}
+        with open('data.json', 'w') as f:
+            json.dump(list, f)
+        s.send(b'closeConn')
+        s.close()
+        #run()
+        # Un-comment upper statement after implemented writing to file
+    #while 1:
+    #data = s.recv(BUFFER_SIZE)
+    #if not data: break
+    #print ('received data: ', data)
 
-if os.path.exists(basedir + 'data.json'):
-    f = open('data.json')
-    data = json.loads(f)
-    s.send(data['id'])
-    f.close()
-    s.close()
-else:
-    s.send(b'newU')
-    recData = s.recv(BUFFER_SIZE)
-    if recData == b'sendData':
-        data = os.getlogin()
-        s.send(data.encode('utf-32'))
-    recId = s.recv(BUFFER_SIZE)
-    list = {'id': recId}
-    print(list)
-    s.close()
-""" while 1:
-    data = s.recv(BUFFER_SIZE)
-    if not data: break
-    print ('received data: ', data) """
+if __name__ == '__main__':
+    run()
 
 #
 #import os
@@ -51,3 +61,5 @@ if R.ok:
     print("Content", R.content)
 else:
     R.raise_for_status() # Just raises err for now.... """
+
+    
